@@ -1,4 +1,4 @@
-package jp.example.berserker;
+package jp.example.berserker.model;
 
 import lombok.Getter;
 import lombok.Setter;

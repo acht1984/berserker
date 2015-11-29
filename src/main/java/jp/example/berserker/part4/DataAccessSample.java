@@ -1,4 +1,4 @@
-package jp.example.berserker;
+package jp.example.berserker.part4;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +10,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import jp.example.berserker.model.User;
 
 @Component
 public class DataAccessSample {
