@@ -11,6 +11,7 @@ ext {
  
   // spring framework
   springVersion = "4.2.3.RELEASE"
+  springDataMirageVersion = '0.3.2.RELEASE'
  
   // mysql
   mysqlVersion = "5.1.37"
@@ -33,7 +34,8 @@ tasks.withType(AbstractCompile) each {
 
 repositories {
     mavenCentral()
-    maven { url "http://repo.springsource.org/release" }
+	maven { url "http://repo.springsource.org/release" }
+	maven { url "http://maven.xet.jp/release" } // for spring-data-mirage
 }
 
 dependencies {
@@ -41,6 +43,7 @@ dependencies {
 	compile "org.springframework:spring-context-support:$springVersion"
 	compile "org.springframework:spring-tx:$springVersion"
     compile "org.springframework:spring-jdbc:$springVersion"
+	compile "org.springframework.data:spring-data-mirage:$springDataMirageVersion"
 	
 
 	// loggers
@@ -58,11 +61,12 @@ dependencies {
 
 // ======== wrapper ========
 task wrapper(type: Wrapper) {
-	gradleVersion = "2.4"
+	gradleVersion = "2.5"
 }
 
 // ======== run ========
 task execute(type: JavaExec, dependsOn: classes) {
-	main = "jp.example.berserker.part4.DataAccessSample"
+	// main = "jp.example.berserker.part4.DataAccessSample"
+	main = "jp.example.berserker.part5.SpringDataMirageSample"
 	classpath = sourceSets.main.runtimeClasspath
 }
