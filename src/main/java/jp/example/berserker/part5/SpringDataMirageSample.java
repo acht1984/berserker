@@ -1,8 +1,12 @@
 package jp.example.berserker.part5;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,5 +46,10 @@ public class SpringDataMirageSample {
 
 		// delete
 		userRepos.delete("watanabe");
+
+		// find by length
+		Page<User> p = userRepos.findByUsername(6, new PageRequest(0, 2));
+		List<User> users = p.getContent();
+		assert users.size() <= 2;
 	}
 }
