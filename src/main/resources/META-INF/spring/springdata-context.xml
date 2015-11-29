@@ -6,5 +6,5 @@
 		http://www.springframework.org/schema/data/mirage http://www.springframework.org/schema/data/mirage/spring-mirage-1.0.xsd">
 
 	<import resource="classpath:/META-INF/spring/mirage-context.xml" />
-	<mirage:repositories base-package="jp.classmethod.example.berserker" sql-manager-ref="sqlManager" />
+	<mirage:repositories base-package="jp.example.berserker" sql-manager-ref="sqlManager" />
 </beans>

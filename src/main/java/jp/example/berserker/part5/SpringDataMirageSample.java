@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import jp.example.berserker.model.User;
 import jp.example.berserker.model.UserRepository;
-import jp.sf.amateras.mirage.integration.guice.Transactional;
 
 @Component
 public class SpringDataMirageSample {
