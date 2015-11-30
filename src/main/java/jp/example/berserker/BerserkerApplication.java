@@ -1,30 +1,35 @@
-package jp.example.berserker.part5;
-
-import java.util.List;
+package jp.example.berserker;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mirage.repository.config.EnableMirageRepositories;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
 
 import jp.example.berserker.model.User;
 import jp.example.berserker.model.UserRepository;
 
-@Component
-public class SpringDataMirageSample {
+@Configuration
+@ComponentScan
+@EnableMirageRepositories
+public class BerserkerApplication {
 
 	public static void main(String[] args) {
-		try (ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml")) {
-			SpringDataMirageSample sdms = context.getBean(SpringDataMirageSample.class);
-			sdms.execute();
+		try (ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(
+				BerserkerApplication.class)) {
+			BerserkerApplication main = context.getBean(BerserkerApplication.class);
+			main.execute();
 		}
 	}
 
 	@Autowired
 	UserRepository userRepos;
+
+	@Autowired
+	PlatformTransactionManager txManager;
 
 	@Transactional
 	public void execute() {
@@ -46,10 +51,5 @@ public class SpringDataMirageSample {
 
 		// delete
 		userRepos.delete("watanabe");
-
-		// find by length
-		Page<User> p = userRepos.findByUsername(6, new PageRequest(0, 2));
-		List<User> users = p.getContent();
-		assert users.size() <= 2;
 	}
 }
